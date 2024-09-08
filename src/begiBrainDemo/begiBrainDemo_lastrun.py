@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on septiembre 07, 2024, at 13:27
+    on septiembre 08, 2024, at 14:57
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -33,11 +33,6 @@ import sys  # to get file system encoding
 import psychopy.iohub as io
 from psychopy.hardware import keyboard
 
-# Run 'Before Experiment' code from flicker_daemon
-frecuencia_monitor = 144
-frecuencia_parpadeo = 30  # Hz, frecuencia de parpadeo deseada (valor inicial)
-frames_por_ciclo = int((frecuencia_monitor / frecuencia_parpadeo) / 2)
-opacidad = 1
 # Run 'Before Experiment' code from code_21
 from psychopy import core
 
@@ -1776,13 +1771,18 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     thisExp.addData('FFT_STAIRCASE_TEST.started', globalClock.getTime())
+    # Run 'Begin Routine' code from flicker_daemon
+    frecuencia_monitor = 144
+    frecuencia_parpadeo = 30  # Hz, frecuencia de parpadeo deseada (valor inicial)
+    frames_por_ciclo = int((frecuencia_monitor / frecuencia_parpadeo) / 2)
+    opacidad = 1
     # Run 'Begin Routine' code from code_21
     import csv
     
     # Variables estaticas
     fft_starting_value = 15
     fft_step_size = 2
-    stop_reversals = 5#10
+    stop_reversals = 10
     
     # Inicializacion de variables que posteriormente cambian
     fft = fft_starting_value
@@ -1832,9 +1832,12 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
         # update/draw components on each frame
         # Run 'Each Frame' code from flicker_daemon
+        if fft is not None:
+            frames_por_ciclo = int((frecuencia_monitor / fft) / 2)
+            opacidad = 1 if (frameN % (2 * frames_por_ciclo)) < frames_por_ciclo else 0
+        else:
+            opacidad = 1
         
-        frames_por_ciclo = int((frecuencia_monitor / fft) / 2)
-        opacidad = 1 if (frameN % (2 * frames_por_ciclo)) < frames_por_ciclo else 0
         grating_8.opacity = opacidad
         # Run 'Each Frame' code from code_21
         keys = event.getKeys()
@@ -1851,9 +1854,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if correct_responses == 2:  # Después de 2 respuestas correctas consecutivas
                     correct_responses = 0
                     fft = max(0, fft + step)  # Aumentar flicker
-                    if last_direction == "up":
-                        reversals += 1
-                        reversal_ffts.append(fft)
                     last_direction = "down"
             else:  # Respuesta incorrecta: el paciente no aprecia el parpadeo
                 fft -= step  # disminuir el parpadeo
@@ -1861,6 +1861,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if last_direction == "down":
                     reversals += 1
                     reversal_ffts.append(fft)
+                    # Regla para aumentar la granularidad del test
+                    if (reversals % 3 == 0) and reversals != 0:
+                        step = step/2
+                        print(f"Reversals = {reversals}; New step = {step}")
+                        last_direction = "up"
+                    else:
+                        print(f'Reversal detected ({reversals})')
                 last_direction = "up"
                 
             grating_8.setAutoDraw(False)
@@ -1879,11 +1886,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # Restablecer la respuesta para el siguiente ensayo
             response = None
-            
-            # Regla para aumentar la granularidad del test
-            if (reversals % 3 == 0) and reversals != 0:
-                step = step/2
-                print(f"New step = {step}")
                 
             # Regla de detencion
             if reversals >= stop_reversals:
@@ -2406,7 +2408,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Variables estaticas
     sf_starting_value = 50
     sf_step_size = 15
-    stop_reversals = 5#10
+    stop_reversals = 10
     
     # Inicializacion de variables que posteriormente cambian
     sf = sf_starting_value
@@ -2470,9 +2472,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if correct_responses == 2:  # Después de 2 respuestas correctas consecutivas
                     correct_responses = 0
                     sf = max(0, sf + step)  # Aumentar las lineas
-                    if last_direction == "up":
-                        reversals += 1
-                        reversal_sf.append(sf)
                     last_direction = "down"
             else: 
                 sf = sf - step
@@ -2480,6 +2479,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if last_direction == "down":
                     reversals += 1
                     reversal_sf.append(sf)
+                    # Regla para aumentar la granularidad del test
+                    if (reversals % 3 == 0) and reversals != 0:
+                        step = step/2
+                        print(f"Reversals = {reversals}; New step = {step}")
+                        last_direction = "up"
+                    else:
+                        print(f'Reversal detected ({reversals})')
                 last_direction = "up"
                 
             grating_7.setAutoDraw(False)
@@ -2498,11 +2504,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # Restablecer la respuesta para el siguiente ensayo
             response = None
-            
-            # Regla para aumentar la granularidad del test
-            if (reversals % 3 == 0) and reversals != 0:
-                step = step/2
-                print(f"New step = {step}")
                 
             # Regla de detencion
             if reversals >= stop_reversals:
@@ -3030,7 +3031,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
     # Variables estaticas
     contrast_starting_value = 0.05
     contrast_step_size = 0.01
-    stop_reversals = 5#10
+    stop_reversals = 10
     
     # Inicializacion de variables que posteriormente cambian
     contrast = contrast_starting_value
@@ -3094,9 +3095,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if correct_responses == 2:  # Después de 2 respuestas correctas consecutivas
                     correct_responses = 0
                     contrast = max(0, contrast - step)  # Disminuir el contraste
-                    if last_direction == "up":
-                        reversals += 1
-                        reversal_contrasts.append(contrast)
                     last_direction = "down"
             else:  # Respuesta incorrecta: el paciente no ve el estimulo
                 contrast += step  # Aumentar el contraste
@@ -3104,6 +3102,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if last_direction == "down":
                     reversals += 1
                     reversal_contrasts.append(contrast)
+                    
+                    if (reversals % 3 == 0) and reversals != 0:
+                        step = step/2
+                        print(f"Reversals = {reversals}; New step = {step}")
+                        last_direction = "up"
+                    else:
+                        print('Reversal detected ({reversals})')
                 last_direction = "up"
                 
             grating.setAutoDraw(False)
@@ -3122,12 +3127,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # Restablecer la respuesta para el siguiente ensayo
             response = None
-            
-            # Regla para aumentar la granularidad del test
-            if (reversals % 3 == 0) and reversals != 0:
-                step = step/2
-                print(f"New step = {step}")
-                
+        
             # Regla de detencion
             if reversals >= stop_reversals:
                 print(trials)
@@ -3733,9 +3733,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if correct_responses == 2:  # Después de 2 respuestas correctas consecutivas
                     correct_responses = 0
                     saturation = max(0, saturation - step)
-                    if last_direction == "up":
-                        reversals += 1
-                        reversal_saturations.append(saturation)
                     last_direction = "down"
             else:  # Respuesta incorrecta: el paciente no ve el estimulo
                 saturation += step  # Aumentar el contraste
@@ -3743,6 +3740,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if last_direction == "down":
                     reversals += 1
                     reversal_saturations.append(saturation)
+                    # Regla para aumentar la granularidad del test
+                    if (reversals % 3 == 0) and reversals != 0:
+                        step = step/2
+                        print(f"Reversals = {reversals}; New step = {step}")
+                        last_direction = "up"
+                    else:
+                        print(f'Reversal detected ({reversals})')
                 last_direction = "up"
                
             image_2.setAutoDraw(False)
@@ -3773,11 +3777,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # Restablecer la respuesta para el siguiente ensayo
             response = None
-            
-            # Regla para aumentar la granularidad del test
-            if (reversals % 3 == 0) and reversals != 0:
-                step = step/2
-                print(f"New step = {step}")
                 
             # Regla de detencion
             if reversals >= stop_reversals:
