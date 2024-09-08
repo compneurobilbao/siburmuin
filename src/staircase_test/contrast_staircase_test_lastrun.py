@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on agosto 20, 2024, at 13:03
+    on septiembre 08, 2024, at 14:33
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -154,7 +154,7 @@ def setupWindow(expInfo=None, win=None):
     if win is None:
         # if not given a window to setup, make one
         win = visual.Window(
-            size=[1440, 900], fullscr=True, screen=0,
+            size=[1440, 900], fullscr=True, screen=1,
             winType='pyglet', allowStencil=False,
             monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
@@ -405,9 +405,9 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if correct_responses == 2:  # Después de 2 respuestas correctas consecutivas
                     correct_responses = 0
                     contrast = max(0, contrast - step)  # Disminuir el contraste
-                    if last_direction == "up":
-                        reversals += 1
-                        reversal_contrasts.append(contrast)
+                    #if last_direction == "up":
+                    #    reversals += 1
+                    #    reversal_contrasts.append(contrast)
                     last_direction = "down"
             else:  # Respuesta incorrecta: el paciente no ve el estimulo
                 contrast += step  # Aumentar el contraste
@@ -415,7 +415,13 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
                 if last_direction == "down":
                     reversals += 1
                     reversal_contrasts.append(contrast)
-                last_direction = "up"
+                    # Regla para aumentar la granularidad del test
+                    if (reversals % 3 == 0) and reversals != 0:
+                        step = step/2
+                        print(f"Reversals = {reversals}; New step = {step}")
+                        last_direction = "up"
+                    else:
+                        print('Reversal detected ({reversals})')
             
             # Actualizar el contraste del estímulo
             grating.contrast = contrast
@@ -430,11 +436,6 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
             
             # Restablecer la respuesta para el siguiente ensayo
             response = None
-            
-            # Regla para aumentar la granularidad del test
-            if (reversals % 3 == 0) and reversals != 0:
-                step = step/2
-                print(f"New step = {step}")
                 
             # Regla de detencion
             if reversals >= stop_reversals:
@@ -451,7 +452,7 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         #########################################################
         #############____________LOGS_________###################
         #########################################################
-        logs.text = f"Step Size = {step_size}"
+        logs.text = f"Step Size = {step}"
         
         # *key_resp* updates
         waitOnFlip = False
