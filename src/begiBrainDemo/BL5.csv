@@ -1,0 +1,13 @@
+intento;path;posicion_angular;tipo;excentricidad;;tamanyo
+BL5_1;semantic_stims/bee.png;0;animal;0;;0,25
+BL5_2;semantic_stims/bear_2.png;0;animal;0;;0,25
+BL5_3;semantic_stims/bear.png;0;animal;0;;0,25
+BL5_4;semantic_stims/airplane.png;0;inerte;0;;0,25
+BL5_5;semantic_stims/helicopter.png;0;inerte;0;;0,25
+BL5_6;semantic_stims/duck.png;0;animal;0;;0,25
+BL5_7;semantic_stims/computer_mouse.png;0;inerte;0;;0,25
+BL5_8;semantic_stims/cat.png;0;animal;0;;0,25
+BL5_9;semantic_stims/camel.png;0;animal;0;;0,25
+BL5_10;semantic_stims/bulldozer_2.png;0;inerte;0;;0,25
+BL5_11;semantic_stims/bulldozer.png;0;inerte;0;;0,25
+BL5_12;semantic_stims/bottle_opener.png;0;inerte;0;;0,25
