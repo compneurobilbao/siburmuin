@@ -1,9 +1,9 @@
 {
     "spatial_frequency_threshold": 98.33333333333333,
     "flicker_threshold": 31.444444444444443,
-    "contrast_threshold": 0.017777777777777677,
+    "contrast_threshold": 0.00375,
     "color_threshold": {
-        "red": 1.52777777777778,
-        "green": 9.30555555555556
+        "red": 0.9375,
+        "green": 0.9375
     }
 }
