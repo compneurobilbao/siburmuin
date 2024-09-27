@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2023.2.3),
-    on septiembre 27, 2024, at 12:32
+    on septiembre 27, 2024, at 14:40
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -149,6 +149,98 @@ def load_thresholds_from_json(filename='./data/thresholds.json'):
     print(f"Diccionario cargado desde {filename}")
     return threshold_dict
 
+# Run 'Before Experiment' code from gabor_generator
+import numpy as np
+from PIL import Image
+import matplotlib.pyplot as plt
+
+
+def save_gabor_patch_image(frequency, size, c1, c2):
+    amp, f = generate_gabor_patch(frequency, size)
+    
+    # Convertir colores a numpy arrays y expandir dimensiones para el canal de transparencia
+    c1 = np.array(c1)
+    c2 = np.array(c2)
+    
+    # Calcular los valores de color para el parche
+    im_rgb_vals = (c1 * amp[:, :, None]) + (c2 * (1 - amp[:, :, None]))
+    
+    # Crear el canal de alfa (transparencia): 1 donde hay el parche, 0 en el fondo
+    alpha_channel = f
+    
+    # Combinar los valores RGB con el canal alfa para crear una imagen RGBA
+    im_rgba_vals = np.dstack((im_rgb_vals, alpha_channel))
+    
+    # Convertir a imagen
+    im = Image.fromarray((im_rgba_vals * 255).astype('uint8'), 'RGBA')
+    im.save(f"./images/custom_stim.png")
+
+def generate_gabor_patch(frequency, size):
+    im_range = np.arange(size)
+    x, y = np.meshgrid(im_range, im_range)
+    dx = x - size // 2
+    dy = y - size // 2
+    t = np.arctan2(dy, dx)
+    r = np.sqrt(dx ** 2 + dy ** 2)
+    x = r * np.cos(t)
+    y = r * np.sin(t)
+    
+    # Transición brusca para los colores (líneas) en el patrón Gabor
+    amp = np.where(np.cos(2 * np.pi * (x * frequency)) >= 0, 1, 0)
+    f = np.where(r <= size // 2, 1, 0)
+    
+    return amp, f
+def hsv_a_rgb(h, s, v):
+    """
+    Convierte un color desde HSV a RGB.
+
+    Parámetros:
+    h (float): Matiz (Hue) en grados (0-360).
+    s (float): Saturación (Saturation) como porcentaje (0-100).
+    v (float): Valor (Value) como porcentaje (0-100).
+
+    Retorna:
+    tuple: Una tupla con valores (R, G, B), cada uno en el rango de 0 a 255.
+    """
+    h = h % 360
+    s /= 100
+    v /= 100
+
+    c = v * s
+    x = c * (1 - abs((h / 60) % 2 - 1))
+    m = v - c
+
+    if 0 <= h < 60:
+        r, g, b = c, x, 0
+    elif 60 <= h < 120:
+        r, g, b = x, c, 0
+    elif 120 <= h < 180:
+        r, g, b = 0, c, x
+    elif 180 <= h < 240:
+        r, g, b = 0, x, c
+    elif 240 <= h < 300:
+        r, g, b = x, 0, c
+    else:
+        r, g, b = c, 0, x
+
+    r = (r + m) * 255
+    g = (g + m) * 255
+    b = (b + m) * 255
+
+    return int(round(r)), int(round(g)), int(round(b))
+
+
+def normalizar_rgb(rgb):
+    """
+    Normaliza una tupla de valores RGB dividiendo cada componente por 255.
+
+    Parámetros:
+    rgb (tuple): Una tupla con valores (R, G, B), cada uno en el rango de 0 a 255.
+
+    Retorna:
+    tuple: Una tupla con valores normalizados (R, G, B), cada uno en el rango de 0 a 1.
+    """
+    return tuple(component / 255 for component in rgb)
 # Run 'Before Experiment' code from code_14
 import pandas as pd
 
@@ -570,6 +662,41 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=-8.0);
+    
+    # --- Initialize components for Routine "COLOR_STAIRCASE_TEST" ---
+    key_resp_15 = keyboard.Keyboard()
+    logs_11 = visual.TextStim(win=win, name='logs_11',
+        text='Any text\n\nincluding line breaks',
+        font='Open Sans',
+        pos=(0, -0.45), height=0.025, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
+    image_2 = visual.ImageStim(
+        win=win,
+        name='image_2', 
+        image='default.png', mask=None, anchor='center',
+        ori=0.0, pos=(0, 0), size=grating_size,
+        color=[1,1,1], colorSpace='rgb', opacity=None,
+        flipHoriz=False, flipVert=False,
+        texRes=512.0, interpolate=True, depth=-4.0)
+    dots_white_2 = visual.DotStim(
+        win=win, name='dots_white_2',
+        nDots=noise_dots, dotSize=2.0,
+        speed=0.1, dir=0.0, coherence=1.0,
+        fieldPos=(0.0, 0.0), fieldSize=[1.75,1], fieldAnchor='center', fieldShape='square',
+        signalDots='same', noiseDots='direction',dotLife=3.0,
+        color=[1.0000, 1.0000, 1.0000], colorSpace='rgb', opacity=None,
+        depth=-5.0)
+    dots_black_2 = visual.DotStim(
+        win=win, name='dots_black_2',
+        nDots=noise_dots, dotSize=2.0,
+        speed=0.1, dir=0.0, coherence=1.0,
+        fieldPos=(0.0, 0.0), fieldSize=[1.75,1], fieldAnchor='center', fieldShape='square',
+        signalDots='same', noiseDots='direction',dotLife=3.0,
+        color=[-1.0000, -1.0000, -1.0000], colorSpace='rgb', opacity=None,
+        depth=-6.0)
+    key_resp_21 = keyboard.Keyboard()
     
     # --- Initialize components for Routine "LOAD_THRESHOLDS" ---
     
@@ -1344,6 +1471,378 @@ def run(expInfo, thisExp, win, inputs, globalClock=None, thisSession=None):
         if thisColors_to_test != None:
             for paramName in thisColors_to_test:
                 globals()[paramName] = thisColors_to_test[paramName]
+        
+        # --- Prepare to start Routine "COLOR_STAIRCASE_TEST" ---
+        continueRoutine = True
+        # update component parameters for each repeat
+        thisExp.addData('COLOR_STAIRCASE_TEST.started', globalClock.getTime())
+        # Run 'Begin Routine' code from code_19
+        import csv
+        # Variables estaticas
+        saturation_starting_value = 55
+        saturation_step_size = 5
+        staircase_test_orientation = get_random_orientation()
+        
+        # Inicializacion de variables que posteriormente cambian
+        saturation = saturation_starting_value
+        step = saturation_step_size
+        reversals = 0
+        last_direction = None
+        reversal_saturations = []
+        correct_responses = 0
+        trials = []
+        
+        # Para almacenar las respuestas del participante
+        response = None
+        
+        dots_white_2.setAutoDraw(False)
+        dots_black_2.setAutoDraw(False)
+        
+        # Tipo de test
+        if color_saturation_type == 'low':
+            static_saturation = 0
+            saturation_starting_value = 15
+        elif color_saturation_type == 'high':
+            static_saturation = 70
+            saturation_starting_value = 100
+        elif color_saturation_type == 'medium':
+            static_saturation = 50
+            saturation_starting_value = 70
+        else:
+            print("No se ha especificado un tipo de saturación a medir")
+            static_saturation = 0
+            saturation_starting_value = 0
+        
+        saturation = saturation_starting_value
+        # Inicializacion de variables
+        # Cargar frecuencia espacial del test
+        threshold_dict = load_thresholds_from_json()
+        print(f"Se ha establecido la frecuencia espacial del estímulo a un valor de {threshold_dict['spatial_frequency_threshold']} unidades.")
+        
+        frequency = threshold_dict['spatial_frequency_threshold']/500 # division para equiparar con psychopy
+        size = 400
+        c1_hsv = (color_h, static_saturation, color_v) # From XLS
+        c2_hsv = (color_h, saturation, color_v)
+        print(f"Testing color: {color_name}")
+        
+        image_2.ori = staircase_test_orientation
+        
+        # Generar el parche de Gabor
+        save_gabor_patch_image(frequency, 
+                               size, 
+                               normalizar_rgb(hsv_a_rgb(*c1_hsv)), 
+                               normalizar_rgb(hsv_a_rgb(*c2_hsv)))
+        key_resp_15.keys = []
+        key_resp_15.rt = []
+        _key_resp_15_allKeys = []
+        # Run 'Begin Routine' code from gabor_generator
+        
+        
+        
+        
+        dots_white_2.refreshDots()
+        dots_black_2.refreshDots()
+        key_resp_21.keys = []
+        key_resp_21.rt = []
+        _key_resp_21_allKeys = []
+        # keep track of which components have finished
+        COLOR_STAIRCASE_TESTComponents = [key_resp_15, logs_11, image_2, dots_white_2, dots_black_2, key_resp_21]
+        for thisComponent in COLOR_STAIRCASE_TESTComponents:
+            thisComponent.tStart = None
+            thisComponent.tStop = None
+            thisComponent.tStartRefresh = None
+            thisComponent.tStopRefresh = None
+            if hasattr(thisComponent, 'status'):
+                thisComponent.status = NOT_STARTED
+        # reset timers
+        t = 0
+        _timeToFirstFrame = win.getFutureFlipTime(clock="now")
+        frameN = -1
+        
+        # --- Run Routine "COLOR_STAIRCASE_TEST" ---
+        routineForceEnded = not continueRoutine
+        while continueRoutine:
+            # get current time
+            t = routineTimer.getTime()
+            tThisFlip = win.getFutureFlipTime(clock=routineTimer)
+            tThisFlipGlobal = win.getFutureFlipTime(clock=None)
+            frameN = frameN + 1  # number of completed frames (so 0 is the first frame)
+            # update/draw components on each frame
+            # Run 'Each Frame' code from code_19
+            keys = event.getKeys()
+            
+            if 's' in keys: # El paciente ve el estimulo
+                response = True
+            elif 'n' in keys: # El paciente no ve las lineas
+                response = False
+            elif 'right' in keys and staircase_test_orientation == 45: # Acierto
+                response = True
+            elif 'left' in keys and staircase_test_orientation == 135: # Acierto
+                response = True
+            elif 'right' in keys or 'left' in keys:
+                response = False
+            
+            # Lógica del staircase
+            if response is not None:
+                if response:  # Respuesta correcta: el paciente ve el estimulo
+                    correct_responses += 1
+                    if correct_responses == 2:  # Después de 2 respuestas correctas consecutivas
+                        correct_responses = 0
+                        saturation = max(0, saturation - step)
+                        if saturation < static_saturation:
+                            # si pasa esto, el test se pasa de rosca. Hay que limitar el valor.
+                            saturation = static_saturation
+                        last_direction = "down"
+                else:  # Respuesta incorrecta: el paciente no ve el estimulo
+                    saturation += step  # Aumentar el contraste
+                    if saturation > 100: # Limitar maximo para que no se pase de rosca
+                        saturation = 100
+                    correct_responses = 0
+                    if last_direction == "down":
+                        reversals += 1
+                        reversal_saturations.append(saturation)
+                        # Regla para aumentar la granularidad del test
+                        if (reversals % 2 == 0) and reversals != 0:
+                            step = step/2
+                            print(f"Reversals = {reversals}; New step = {step}")
+                            last_direction = "up"
+                        else:
+                            print(f'Reversal detected ({reversals})')
+                    last_direction = "up"
+                   
+                image_2.setAutoDraw(False)
+                show_noise(dots_white_2, dots_black_2, staircase_noise_duration)
+                image_2.setAutoDraw(True)
+                
+                # Actualizar el color y rotacion del estímulo
+                staircase_test_orientation = get_random_orientation()
+                image_2.ori = staircase_test_orientation
+                c2_hsv = (color_h, saturation, color_v)
+                print(f"Color 1: {c1_hsv}\nColor 2: {c2_hsv}\n")
+            
+            #logs.text = f'freq = {frequency:.2f}\nc1 = ({c1[0]:.2f}, {c1[1]:.2f}, {c1[2]:.2f})\nc2 = ({c2[0]:.2f}, {c2[1]:.2f}, {c2[2]:.2f})'
+            # Generar el parche de Gabor
+            
+                save_gabor_patch_image(frequency, 
+                                   size, 
+                                   normalizar_rgb(hsv_a_rgb(*c1_hsv)), 
+                                   normalizar_rgb(hsv_a_rgb(*c2_hsv)))
+                
+                # Registrar la información del ensayo
+                trials.append({
+                    'trial': len(trials) + 1,
+                    'saturation': saturation,
+                    'response': response,
+                    'reversals': reversals
+                })
+                
+                # Restablecer la respuesta para el siguiente ensayo
+                response = None
+                    
+                # Regla de detencion
+                if reversals >= stop_reversals:
+                    print(trials)
+                    # almaceno trials en 'data' para su posterior analisis
+                    staircase_data_filename = f'./data/saturation_staircase_test_data_{color_name}_{color_saturation_type}.csv'
+                    with open(staircase_data_filename, mode='w', newline='') as file:
+                        writer = csv.DictWriter(file, fieldnames=['trial', 'saturation', 'response', 'reversals'])
+                        writer.writeheader()
+                        writer.writerows(trials)
+                    
+                    # Actualizar y almacenar el diccionario de thresholds
+                    test_saturation = get_threshold('saturation', staircase_data_filename)
+                    print(f"Saturation Threshold for patient: {test_saturation}")
+                    threshold_dict['color_threshold'][color_name] = test_saturation-static_saturation
+                    save_thresholds_to_json(threshold_dict)
+                    
+                    
+                    continueRoutine = False
+            
+                dots_white_2.setAutoDraw(False)
+                dots_black_2.setAutoDraw(False)
+                
+            #########################################################
+            #############____________LOGS_________###################
+            #########################################################
+            logs_11.text = f"Step Size = {step}"
+            
+            dots_white_2.setAutoDraw(False)
+            dots_black_2.setAutoDraw(False)
+            
+            # *key_resp_15* updates
+            waitOnFlip = False
+            
+            # if key_resp_15 is starting this frame...
+            if key_resp_15.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                key_resp_15.frameNStart = frameN  # exact frame index
+                key_resp_15.tStart = t  # local t and not account for scr refresh
+                key_resp_15.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(key_resp_15, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'key_resp_15.started')
+                # update status
+                key_resp_15.status = STARTED
+                # keyboard checking is just starting
+                waitOnFlip = True
+                win.callOnFlip(key_resp_15.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(key_resp_15.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            if key_resp_15.status == STARTED and not waitOnFlip:
+                theseKeys = key_resp_15.getKeys(keyList=['s','n'], ignoreKeys=["escape"], waitRelease=False)
+                _key_resp_15_allKeys.extend(theseKeys)
+                if len(_key_resp_15_allKeys):
+                    key_resp_15.keys = _key_resp_15_allKeys[-1].name  # just the last key pressed
+                    key_resp_15.rt = _key_resp_15_allKeys[-1].rt
+                    key_resp_15.duration = _key_resp_15_allKeys[-1].duration
+            
+            # *logs_11* updates
+            
+            # if logs_11 is starting this frame...
+            if logs_11.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                logs_11.frameNStart = frameN  # exact frame index
+                logs_11.tStart = t  # local t and not account for scr refresh
+                logs_11.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(logs_11, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'logs_11.started')
+                # update status
+                logs_11.status = STARTED
+                logs_11.setAutoDraw(True)
+            
+            # if logs_11 is active this frame...
+            if logs_11.status == STARTED:
+                # update params
+                pass
+            
+            # *image_2* updates
+            
+            # if image_2 is starting this frame...
+            if image_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                image_2.frameNStart = frameN  # exact frame index
+                image_2.tStart = t  # local t and not account for scr refresh
+                image_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(image_2, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'image_2.started')
+                # update status
+                image_2.status = STARTED
+                image_2.setAutoDraw(True)
+            
+            # if image_2 is active this frame...
+            if image_2.status == STARTED:
+                # update params
+                image_2.setImage('./images/custom_stim.png', log=False)
+            
+            # *dots_white_2* updates
+            
+            # if dots_white_2 is starting this frame...
+            if dots_white_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                dots_white_2.frameNStart = frameN  # exact frame index
+                dots_white_2.tStart = t  # local t and not account for scr refresh
+                dots_white_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(dots_white_2, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'dots_white_2.started')
+                # update status
+                dots_white_2.status = STARTED
+                dots_white_2.setAutoDraw(True)
+            
+            # if dots_white_2 is active this frame...
+            if dots_white_2.status == STARTED:
+                # update params
+                pass
+            
+            # *dots_black_2* updates
+            
+            # if dots_black_2 is starting this frame...
+            if dots_black_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                dots_black_2.frameNStart = frameN  # exact frame index
+                dots_black_2.tStart = t  # local t and not account for scr refresh
+                dots_black_2.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(dots_black_2, 'tStartRefresh')  # time at next scr refresh
+                # update status
+                dots_black_2.status = STARTED
+                dots_black_2.setAutoDraw(True)
+            
+            # if dots_black_2 is active this frame...
+            if dots_black_2.status == STARTED:
+                # update params
+                pass
+            
+            # *key_resp_21* updates
+            waitOnFlip = False
+            
+            # if key_resp_21 is starting this frame...
+            if key_resp_21.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+                # keep track of start time/frame for later
+                key_resp_21.frameNStart = frameN  # exact frame index
+                key_resp_21.tStart = t  # local t and not account for scr refresh
+                key_resp_21.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(key_resp_21, 'tStartRefresh')  # time at next scr refresh
+                # add timestamp to datafile
+                thisExp.timestampOnFlip(win, 'key_resp_21.started')
+                # update status
+                key_resp_21.status = STARTED
+                # keyboard checking is just starting
+                waitOnFlip = True
+                win.callOnFlip(key_resp_21.clock.reset)  # t=0 on next screen flip
+                win.callOnFlip(key_resp_21.clearEvents, eventType='keyboard')  # clear events on next screen flip
+            if key_resp_21.status == STARTED and not waitOnFlip:
+                theseKeys = key_resp_21.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
+                _key_resp_21_allKeys.extend(theseKeys)
+                if len(_key_resp_21_allKeys):
+                    key_resp_21.keys = _key_resp_21_allKeys[-1].name  # just the last key pressed
+                    key_resp_21.rt = _key_resp_21_allKeys[-1].rt
+                    key_resp_21.duration = _key_resp_21_allKeys[-1].duration
+                    # a response ends the routine
+                    continueRoutine = False
+            
+            # check for quit (typically the Esc key)
+            if defaultKeyboard.getKeys(keyList=["escape"]):
+                thisExp.status = FINISHED
+            if thisExp.status == FINISHED or endExpNow:
+                endExperiment(thisExp, inputs=inputs, win=win)
+                return
+            
+            # check if all components have finished
+            if not continueRoutine:  # a component has requested a forced-end of Routine
+                routineForceEnded = True
+                break
+            continueRoutine = False  # will revert to True if at least one component still running
+            for thisComponent in COLOR_STAIRCASE_TESTComponents:
+                if hasattr(thisComponent, "status") and thisComponent.status != FINISHED:
+                    continueRoutine = True
+                    break  # at least one component has not yet finished
+            
+            # refresh the screen
+            if continueRoutine:  # don't flip if this routine is over or we'll get a blank screen
+                win.flip()
+        
+        # --- Ending Routine "COLOR_STAIRCASE_TEST" ---
+        for thisComponent in COLOR_STAIRCASE_TESTComponents:
+            if hasattr(thisComponent, "setAutoDraw"):
+                thisComponent.setAutoDraw(False)
+        thisExp.addData('COLOR_STAIRCASE_TEST.stopped', globalClock.getTime())
+        # check responses
+        if key_resp_15.keys in ['', [], None]:  # No response was made
+            key_resp_15.keys = None
+        colors_to_test.addData('key_resp_15.keys',key_resp_15.keys)
+        if key_resp_15.keys != None:  # we had a response
+            colors_to_test.addData('key_resp_15.rt', key_resp_15.rt)
+            colors_to_test.addData('key_resp_15.duration', key_resp_15.duration)
+        # check responses
+        if key_resp_21.keys in ['', [], None]:  # No response was made
+            key_resp_21.keys = None
+        colors_to_test.addData('key_resp_21.keys',key_resp_21.keys)
+        if key_resp_21.keys != None:  # we had a response
+            colors_to_test.addData('key_resp_21.rt', key_resp_21.rt)
+            colors_to_test.addData('key_resp_21.duration', key_resp_21.duration)
+        # the Routine "COLOR_STAIRCASE_TEST" was not non-slip safe, so reset the non-slip timer
+        routineTimer.reset()
     # completed 1.0 repeats of 'colors_to_test'
     
     
