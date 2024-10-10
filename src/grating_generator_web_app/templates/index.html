@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll Image Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Scroll to Generate Image</h1>
+    
+    <div class="scroll-container">
+        <!-- Barra de desplazamiento -->
+        <input type="range" id="scrollBar" min="0" max="1" step="0.01" value="0.5">
+        
+        <!-- Campo de texto para mostrar/modificar el valor -->
+        <input type="text" id="scrollValue" value="0.5" style="width: 50px; text-align: center;">
+        
+        <!-- Botones para aumentar o disminuir el valor -->
+        <button id="decreaseBtn">-</button>
+        <button id="increaseBtn">+</button>
+    </div>
+
+    <div class="image-container">
+        <img id="generatedImage" src="" alt="Generated Image">
+    </div>
+
+    <script>
+        const scrollBar = document.getElementById('scrollBar');
+        const image = document.getElementById('generatedImage');
+        const scrollValue = document.getElementById('scrollValue');
+        const decreaseBtn = document.getElementById('decreaseBtn');
+        const increaseBtn = document.getElementById('increaseBtn');
+
+        // Función para actualizar la imagen en el frontend
+        async function updateImage(value) {
+            // Asegurarse de que el valor esté dentro del rango permitido [0, 1]
+            value = Math.min(Math.max(parseFloat(value), 0), 1);
+            
+            // Actualiza el valor del scroll bar y el campo de texto
+            scrollBar.value = value;
+            scrollValue.value = value.toFixed(2);
+            
+            // Hacer una petición al backend con el valor de la barra
+            const response = await fetch('/generate_image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ scrollValue: value })
+            });
+
+            // Convertir la respuesta a blob (imagen)
+            const imgBlob = await response.blob();
+            const imgURL = URL.createObjectURL(imgBlob);
+            
+            // Actualizar la imagen en el frontend
+            image.src = imgURL;
+        }
+
+        // Actualizar imagen cuando el usuario mueva la barra de desplazamiento
+        scrollBar.addEventListener('input', () => {
+            const value = parseFloat(scrollBar.value); // Convertir a flotante
+            updateImage(value);
+        });
+
+        // Actualizar imagen cuando el usuario modifique el valor en el campo de texto
+        scrollValue.addEventListener('change', () => {
+            const value = parseFloat(scrollValue.value); // Convertir a flotante
+            updateImage(value);
+        });
+
+        // Disminuir el valor al hacer clic en el botón "-" (decrease)
+        decreaseBtn.addEventListener('click', () => {
+            let value = parseFloat(scrollBar.value);
+            value = (value - 0.01).toFixed(2); // Disminuir en 0.01
+            updateImage(value);
+        });
+
+        // Aumentar el valor al hacer clic en el botón "+" (increase)
+        increaseBtn.addEventListener('click', () => {
+            let value = parseFloat(scrollBar.value);
+            value = (value + 0.01).toFixed(2); // Aumentar en 0.01
+            updateImage(value);
+        });
+    </script>
+</body>
+</html>
