@@ -23,7 +23,7 @@
     <Param val="True" valType="bool" updates="None" name="Save wide csv file"/>
     <Param val="2" valType="num" updates="None" name="Screen"/>
     <Param val="False" valType="bool" updates="None" name="Show info dlg"/>
-    <Param val="False" valType="bool" updates="None" name="Show mouse"/>
+    <Param val="True" valType="bool" updates="None" name="Show mouse"/>
     <Param val="height" valType="str" updates="None" name="Units"/>
     <Param val="" valType="str" updates="None" name="Use version"/>
     <Param val="[1440, 900]" valType="list" updates="None" name="Window size (pixels)"/>
@@ -80,7 +80,7 @@
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
         <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
         <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="FIJACION_CENTRAL" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
@@ -312,12 +312,12 @@
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
       <CodeComponent name="code" plugin="None">
-        <Param val="# GLOBAL&amp;#10;tamanyo_estimulo = (0.2, 0.2)&amp;#10;&amp;#10;tiempo_descanso = 5&amp;#10;&amp;#10;&amp;#10;# FIJACION CENTRAL&amp;#10;central_fixation_routine_time = 10&amp;#10;&amp;#10;&amp;#10;# SACADAS&amp;#10;sacade_routine_time = 10&amp;#10;pos1 = (0,0)&amp;#10;pos2 = (-0.7,0)&amp;#10;pos3 = (0.7,0.45)&amp;#10;pos4 = (-0.7,-0.45)&amp;#10;pos5 = (-0.7,0.45)&amp;#10;&amp;#10;positions_list = (pos1,pos2,pos3,pos4,pos5,pos1)&amp;#10;&amp;#10;# SEGUIMIENTO&amp;#10;&amp;#10;# LECTURA&amp;#10;texto_lectura = &quot;El perro corre por el parque. Los niños juegan con la pelota. Ana fue al mercado. Compró frutas frescas y un ramo de flores. Al volver a casa, preparó una ensalada para la cena. El sol brilla en el cielo. El cielo es azul. El viento mueve las hojas de los árboles.\n&quot;" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="import time&amp;#10;import math&amp;#10;import random&amp;#10;from datetime import datetime&amp;#10;&amp;#10;# GLOBAL&amp;#10;tamanyo_estimulo = (0.2, 0.2)&amp;#10;&amp;#10;tiempo_descanso = 3&amp;#10;&amp;#10;&amp;#10;central_fixation_routine_time = 10&amp;#10;&amp;#10;&amp;#10;visual_search_image_time = 5&amp;#10;visual_search_wait_time = 0.5&amp;#10;&amp;#10;# SACADAS&amp;#10;sacade_routine_time = 1&amp;#10;pos1 = (0,0)&amp;#10;pos2 = (-0.7,0)&amp;#10;pos3 = (0.7,0.45)&amp;#10;pos4 = (-0.7,-0.45)&amp;#10;pos5 = (-0.7,0.45)&amp;#10;pos6 = (0,0.45)&amp;#10;&amp;#10;positions_list = (pos1,pos2,pos3,pos4,pos5,pos6)&amp;#10;&amp;#10;# SEGUIMIENTO&amp;#10;&amp;#10;# LECTURA&amp;#10;texto_lectura = &quot;El perro corre por el parque. Los niños juegan con la pelota. Ana fue al mercado. Compró frutas frescas y un ramo de flores. Al volver a casa, preparó una ensalada para la cena. El sol brilla en el cielo. El cielo es azul. El viento mueve las hojas de los árboles.\n&quot;&amp;#10;&amp;#10;# DVS&amp;#10;dot_size            = 15/1000&amp;#10;noise_dots_size     = 15#dot_size&amp;#10;&amp;#10;noise_dots_no       = 700&amp;#10;dot_coherence       = 0.0&amp;#10;#noise_dots_direction= 45.0&amp;#10;#noise_coherent_motion = 0.0 # bool&amp;#10;&amp;#10;dot_speed           = 0.0075&amp;#10;noise_dots_speed    = dot_speed&amp;#10;&amp;#10;dot_color           = 'red'&amp;#10;noise_dots_color    = 'white'&amp;#10;&amp;#10;noise_dots_lifetime = 200&amp;#10;field_size          = [1.5,1]&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="time = 10;&amp;#10;" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="&amp;#10;noise_dots_coherence = 0.0&amp;#10;noise_coherent_motion = 0.0 # bool&amp;#10;noise_dots_direction= 45.0&amp;#10;desvio = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="thisExp.addData(&quot;baseTime&quot;, time.time())&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
@@ -336,7 +336,7 @@
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
         <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
         <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="SACADAS" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
@@ -370,7 +370,7 @@
         <Param val="i = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
         <Param val="stim_time = 2" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="# secuencia de movimientos&amp;#10;step = 2&amp;#10;if t&gt;stim_time:&amp;#10;    actual_position_index+=1&amp;#10;    print(f'{t}&gt;{stim_time} - New index i = {actual_position_index}')&amp;#10;    stim_time += step&amp;#10;    print(f&quot;New position: {positions_list[actual_position_index]}&quot;)" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="# secuencia de movimientos&amp;#10;step = 2&amp;#10;if t&gt;stim_time:&amp;#10;    actual_position_index+=1&amp;#10;    if actual_position_index &gt;= len(positions_list):&amp;#10;        actual_position_index = 0&amp;#10;    print(f'{t}&gt;{stim_time} - New index i = {actual_position_index}')&amp;#10;    stim_time += step&amp;#10;    print(f&quot;New position: {positions_list[actual_position_index]}&quot;)" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="stim_time = 2;&amp;#10;step = 2;&amp;#10;if ((t &gt; stim_time)) {&amp;#10;    i += 1;&amp;#10;    stim_time += step;&amp;#10;}&amp;#10;sacade_stimuli.position = positions_list[i];&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
@@ -414,10 +414,10 @@
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
         <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
         <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="INSTRUCTIONS" valType="code" updates="None" name="name"/>
-        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
         <Param val="" valType="code" updates="constant" name="skipIf"/>
         <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
         <Param val="" valType="code" updates="constant" name="stopVal"/>
@@ -641,7 +641,7 @@
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
         <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
         <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="SEGUIMIENTO" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
@@ -680,12 +680,12 @@
       <CodeComponent name="movement_control_backend" plugin="None">
         <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="# Definir una lista de puntos [(x, y)] por los que pasará el estímulo&amp;#10;puntos = [(-0.89, 0), (-0.5, 0.3), (0, 0), (0.5, -0.3), (0.89, 0)]&amp;#10;&amp;#10;# Índice del punto actual&amp;#10;indice_punto = 0&amp;#10;&amp;#10;# Posición inicial&amp;#10;moving_stimuli.pos = puntos[indice_punto]&amp;#10;&amp;#10;velocidad = 0.005  # Velocidad del movimiento" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="# Definir una lista de puntos [(x, y)] por los que pasará el estímulo&amp;#10;puntos = [(-0.89, 0), (-0.5, 0.3), (0, 0), (0.5, -0.3), (0.89, 0)]&amp;#10;&amp;#10;# Índice del punto actual&amp;#10;indice_punto = 0&amp;#10;&amp;#10;# Posición inicial&amp;#10;moving_stimuli.pos = puntos[indice_punto]&amp;#10;&amp;#10;velocidad = 0.008  # Velocidad del movimiento" valType="extendedCode" updates="constant" name="Begin Experiment"/>
         <Param val="puntos = [[(- 0.89), 0], [(- 0.5), 0.3], [0, 0], [0.5, (- 0.3)], [0.89, 0]];&amp;#10;indice_punto = 0;&amp;#10;moving_stimuli.pos = puntos[indice_punto];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
         <Param val="t0 = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="# Reiniciar el tiempo al comenzar la rutina&amp;#10;#t0 = 0&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
         <Param val="Py" valType="str" updates="None" name="Code Type"/>
-        <Param val="# Tiempo transcurrido&amp;#10;#t = t - t0&amp;#10;&amp;#10;# Obtener el siguiente punto de la lista&amp;#10;siguiente_punto = puntos[indice_punto]&amp;#10;&amp;#10;# Calcular la dirección hacia el siguiente punto&amp;#10;direccion = [siguiente_punto[0] - moving_stimuli.pos[0], siguiente_punto[1] - moving_stimuli.pos[1]]&amp;#10;&amp;#10;# Normalizar la dirección&amp;#10;norma = (direccion[0]**2 + direccion[1]**2) ** 0.5&amp;#10;if norma &gt; 0:&amp;#10;    direccion_normalizada = [direccion[0] / norma, direccion[1] / norma]&amp;#10;else:&amp;#10;    direccion_normalizada = [0, 0]&amp;#10;&amp;#10;# Mover el estímulo hacia el siguiente punto&amp;#10;moving_stimuli.pos = [moving_stimuli.pos[0] + direccion_normalizada[0] * velocidad,&amp;#10;                      moving_stimuli.pos[1] + direccion_normalizada[1] * velocidad]&amp;#10;&amp;#10;# Verificar si el estímulo ha alcanzado el siguiente punto&amp;#10;if norma &lt; 0.05:  # Tolerancia para considerar que ha llegado al punto&amp;#10;    indice_punto += 1&amp;#10;    if indice_punto &gt;= len(puntos):&amp;#10;        indice_punto = 0  # Reiniciar a la primera posición&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="# Obtener el siguiente punto de la lista&amp;#10;siguiente_punto = puntos[indice_punto]&amp;#10;&amp;#10;# Calcular la dirección hacia el siguiente punto&amp;#10;direccion = [siguiente_punto[0] - moving_stimuli.pos[0], siguiente_punto[1] - moving_stimuli.pos[1]]&amp;#10;&amp;#10;# Normalizar la dirección&amp;#10;norma = (direccion[0]**2 + direccion[1]**2) ** 0.5&amp;#10;if norma &gt; 0:&amp;#10;    direccion_normalizada = [direccion[0] / norma, direccion[1] / norma]&amp;#10;else:&amp;#10;    direccion_normalizada = [0, 0]&amp;#10;&amp;#10;# Mover el estímulo hacia el siguiente punto&amp;#10;moving_stimuli.pos = [moving_stimuli.pos[0] + direccion_normalizada[0] * velocidad,&amp;#10;                      moving_stimuli.pos[1] + direccion_normalizada[1] * velocidad]&amp;#10;&amp;#10;# Verificar si el estímulo ha alcanzado el siguiente punto&amp;#10;if norma &lt; 0.05:  # Tolerancia para considerar que ha llegado al punto&amp;#10;    indice_punto += 1&amp;#10;    if indice_punto &gt;= len(puntos):&amp;#10;        indice_punto = 0  # Reiniciar a la primera posición&amp;#10;" valType="extendedCode" updates="constant" name="Each Frame"/>
         <Param val="siguiente_punto = puntos[indice_punto];&amp;#10;direccion = [(siguiente_punto[0] - moving_stimuli.pos[0]), (siguiente_punto[1] - moving_stimuli.pos[1])];&amp;#10;norma = Math.pow((Math.pow(direccion[0], 2) + Math.pow(direccion[1], 2)), 0.5);&amp;#10;if ((norma &gt; 0)) {&amp;#10;    direccion_normalizada = [(direccion[0] / norma), (direccion[1] / norma)];&amp;#10;} else {&amp;#10;    direccion_normalizada = [0, 0];&amp;#10;}&amp;#10;velocidad = 0.05;&amp;#10;moving_stimuli.pos = [(moving_stimuli.pos[0] + (direccion_normalizada[0] * velocidad)), (moving_stimuli.pos[1] + (direccion_normalizada[1] * velocidad))];&amp;#10;if ((norma &lt; 0.05)) {&amp;#10;    indice_punto += 1;&amp;#10;    if ((indice_punto &gt;= puntos.length)) {&amp;#10;        indice_punto = 0;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
         <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
         <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
@@ -719,7 +719,7 @@
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
         <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
         <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="LECTURA" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
@@ -795,7 +795,7 @@
         <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
         <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
         <Param val="" valType="str" updates="constant" name="desc"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
         <Param val="" valType="code" updates="None" name="durationEstim"/>
         <Param val="DESCANSO" valType="code" updates="None" name="name"/>
         <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
@@ -874,6 +874,356 @@
         <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
       </KeyboardComponent>
     </Routine>
+    <Routine name="VISUAL_SEARCH">
+      <RoutineSettingsComponent name="VISUAL_SEARCH" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="VISUAL_SEARCH" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <CodeComponent name="end_of_routine_5" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="if t&gt;visual_search_image_time + visual_search_wait_time:&amp;#10;    continueRoutine = False" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="if ((t &gt; (visual_search_image_time + visual_search_wait_time))) {&amp;#10;    continueRoutine = false;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="end_of_routine_5" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="text" plugin="None">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="+" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <ImageComponent name="image" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$path" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="image" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(1920*2/1920, 1080*2/1920)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="visual_search_image_time" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+    </Routine>
+    <Routine name="DVS">
+      <RoutineSettingsComponent name="DVS" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="DVS" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <DotsComponent name="dots" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="noise_dots_coherence" valType="num" updates="constant" name="coherence"/>
+        <Param val="$noise_dots_color" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="0.0" valType="num" updates="constant" name="dir"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="noise_dots_lifetime" valType="num" updates="None" name="dotLife"/>
+        <Param val="noise_dots_size" valType="num" updates="constant" name="dotSize"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="(0.0, 0.0)" valType="list" updates="constant" name="fieldPos"/>
+        <Param val="square" valType="str" updates="constant" name="fieldShape"/>
+        <Param val="field_size" valType="num" updates="constant" name="fieldSize"/>
+        <Param val="noise_dots_no" valType="int" updates="constant" name="nDots"/>
+        <Param val="dots" valType="code" updates="None" name="name"/>
+        <Param val="direction" valType="str" updates="None" name="noiseDots"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="repeat" valType="str" updates="None" name="refreshDots"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="same" valType="str" updates="None" name="signalDots"/>
+        <Param val="noise_dots_speed" valType="num" updates="constant" name="speed"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </DotsComponent>
+      <PolygonComponent name="dot" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="$dot_color" valType="color" updates="constant" name="fillColor"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="$dot_color" valType="color" updates="constant" name="lineColor"/>
+        <Param val="1" valType="num" updates="constant" name="lineWidth"/>
+        <Param val="4" valType="int" updates="constant" name="nVertices"/>
+        <Param val="dot" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="circle" valType="str" updates="None" name="shape"/>
+        <Param val="dot_size" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="list" updates="constant" name="vertices"/>
+      </PolygonComponent>
+      <CodeComponent name="code_2" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="import numpy as np&amp;#10;&amp;#10;def move_dot_smooth(dot, dot_speed, field_size, current_angle, frames_in_direction, frame_count):&amp;#10;    &quot;&quot;&quot;&amp;#10;    Mueve el punto 'dot' de forma suave dentro de los límites de la pantalla.&amp;#10;&amp;#10;    dot: objeto visual de PsychoPy que se va a mover.&amp;#10;    dot_speed: velocidad del punto.&amp;#10;    field_size: tamaño del campo [ancho, alto] en unidades de PsychoPy.&amp;#10;    current_angle: ángulo actual de la dirección del punto.&amp;#10;    frames_in_direction: número de frames en los que el punto mantiene la misma dirección.&amp;#10;    frame_count: contador de frames que indica cuántos frames han pasado en la dirección actual.&amp;#10;&amp;#10;    Returns:&amp;#10;    - new_angle: El ángulo actualizado para la próxima llamada.&amp;#10;    - frame_count: El contador de frames actualizado.&amp;#10;    &quot;&quot;&quot;&amp;#10;    # Si hemos alcanzado el límite de frames para la dirección actual, cambiamos el ángulo&amp;#10;    if frame_count &gt;= frames_in_direction:&amp;#10;        # Elegir un nuevo ángulo aleatorio cercano al actual para mantener la suavidad&amp;#10;        current_angle += np.random.uniform(-np.pi/8, np.pi/8)&amp;#10;        frame_count = 0  # Reiniciar el contador de frames en la nueva dirección&amp;#10;    else:&amp;#10;        frame_count += 1&amp;#10;&amp;#10;    # Calcular el desplazamiento basado en el ángulo&amp;#10;    dx = dot_speed * np.cos(current_angle)&amp;#10;    dy = dot_speed * np.sin(current_angle)&amp;#10;&amp;#10;    # Calcular la nueva posición&amp;#10;    new_x = dot.pos[0] + dx&amp;#10;    new_y = dot.pos[1] + dy&amp;#10;&amp;#10;    # Verificar los límites de la pantalla y ajustar si es necesario&amp;#10;    if new_x &lt; -field_size[0]/2:&amp;#10;        new_x = -field_size[0]/2&amp;#10;        current_angle = np.pi - current_angle  # Invertir dirección horizontal&amp;#10;    elif new_x &gt; field_size[0]/2:&amp;#10;        new_x = field_size[0]/2&amp;#10;        current_angle = np.pi - current_angle&amp;#10;&amp;#10;    if new_y &lt; -field_size[1]/2:&amp;#10;        new_y = -field_size[1]/2&amp;#10;        current_angle = -current_angle  # Invertir dirección vertical&amp;#10;    elif new_y &gt; field_size[1]/2:&amp;#10;        new_y = field_size[1]/2&amp;#10;        current_angle = -current_angle&amp;#10;&amp;#10;    # Actualizar la posición del punto&amp;#10;    dot.pos = (new_x, new_y)&amp;#10;&amp;#10;    return current_angle, frame_count&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import * as np from 'numpy';&amp;#10;function move_dot_smooth(dot, dot_speed, field_size, current_angle, frames_in_direction, frame_count) {&amp;#10;    /*&amp;#10;    Mueve el punto 'dot' de forma suave dentro de los límites de la pantalla.&amp;#10;&amp;#10;    dot: objeto visual de PsychoPy que se va a mover.&amp;#10;    dot_speed: velocidad del punto.&amp;#10;    field_size: tamaño del campo [ancho, alto] en unidades de PsychoPy.&amp;#10;    current_angle: ángulo actual de la dirección del punto.&amp;#10;    frames_in_direction: número de frames en los que el punto mantiene la misma dirección.&amp;#10;    frame_count: contador de frames que indica cuántos frames han pasado en la dirección actual.&amp;#10;&amp;#10;    Returns:&amp;#10;    - new_angle: El ángulo actualizado para la próxima llamada.&amp;#10;    - frame_count: El contador de frames actualizado.&amp;#10;    */&amp;#10;    var dx, dy, new_x, new_y;&amp;#10;    if ((frame_count &gt;= frames_in_direction)) {&amp;#10;        current_angle += np.random.uniform(((- np.pi) / 8), (np.pi / 8));&amp;#10;        frame_count = 0;&amp;#10;    } else {&amp;#10;        frame_count += 1;&amp;#10;    }&amp;#10;    dx = (dot_speed * np.cos(current_angle));&amp;#10;    dy = (dot_speed * np.sin(current_angle));&amp;#10;    new_x = (dot.pos[0] + dx);&amp;#10;    new_y = (dot.pos[1] + dy);&amp;#10;    if ((new_x &lt; ((- field_size[0]) / 2))) {&amp;#10;        new_x = ((- field_size[0]) / 2);&amp;#10;        current_angle = (np.pi - current_angle);&amp;#10;    } else {&amp;#10;        if ((new_x &gt; (field_size[0] / 2))) {&amp;#10;            new_x = (field_size[0] / 2);&amp;#10;            current_angle = (np.pi - current_angle);&amp;#10;        }&amp;#10;    }&amp;#10;    if ((new_y &lt; ((- field_size[1]) / 2))) {&amp;#10;        new_y = ((- field_size[1]) / 2);&amp;#10;        current_angle = (- current_angle);&amp;#10;    } else {&amp;#10;        if ((new_y &gt; (field_size[1] / 2))) {&amp;#10;            new_y = (field_size[1] / 2);&amp;#10;            current_angle = (- current_angle);&amp;#10;        }&amp;#10;    }&amp;#10;    dot.pos = [new_x, new_y];&amp;#10;    return [current_angle, frame_count];&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="current_angle = np.random.uniform(0, (2 * np.pi));&amp;#10;frame_count = 0;&amp;#10;frames_in_direction = 20;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="current_angle = np.random.uniform(0, 2 * np.pi)  # Ángulo inicial aleatorio&amp;#10;frame_count = 0&amp;#10;frames_in_direction = 20  # Ajusta según la duración que desees para cada dirección" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="# Dentro del bucle de cada frame&amp;#10;current_angle, frame_count = move_dot_smooth(dot, dot_speed, field_size, current_angle, frames_in_direction, frame_count)" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="[current_angle, frame_count] = move_dot_smooth(dot, dot_speed, field_size, current_angle, frames_in_direction, frame_count);&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_2" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <KeyboardComponent name="key_resp_3" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp_3" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="WHERE_S_WALDO">
+      <RoutineSettingsComponent name="WHERE_S_WALDO" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="True" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="WHERE_S_WALDO" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <ImageComponent name="image_waldo" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$path" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="image_waldo" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.5, 0.5)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <KeyboardComponent name="key_resp_2" plugin="None">
+        <Param val="'space'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp_2" valType="code" updates="None" name="name"/>
+        <Param val="press" valType="str" updates="constant" name="registerOn"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="DVS_COHERENCE">
+      <RoutineSettingsComponent name="DVS_COHERENCE" plugin="None">
+        <Param val="none" valType="str" updates="None" name="backgroundFit"/>
+        <Param val="" valType="str" updates="None" name="backgroundImg"/>
+        <Param val="$[0,0,0]" valType="color" updates="None" name="color"/>
+        <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+        <Param val="" valType="str" updates="constant" name="desc"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="DVS_COHERENCE" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="constant" name="skipIf"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
+      </RoutineSettingsComponent>
+      <DotsComponent name="dots_2" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="noise_dots_coherence" valType="num" updates="constant" name="coherence"/>
+        <Param val="$noise_dots_color" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="noise_dots_direction" valType="num" updates="set every frame" name="dir"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="noise_dots_lifetime" valType="num" updates="None" name="dotLife"/>
+        <Param val="noise_dots_size" valType="num" updates="constant" name="dotSize"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="(0.0, 0.0)" valType="list" updates="constant" name="fieldPos"/>
+        <Param val="square" valType="str" updates="constant" name="fieldShape"/>
+        <Param val="[field_size[0]+0.5,field_size[1]+0.5]" valType="num" updates="constant" name="fieldSize"/>
+        <Param val="noise_dots_no" valType="int" updates="constant" name="nDots"/>
+        <Param val="dots_2" valType="code" updates="None" name="name"/>
+        <Param val="direction" valType="str" updates="None" name="noiseDots"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="repeat" valType="str" updates="None" name="refreshDots"/>
+        <Param val="False" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="same" valType="str" updates="None" name="signalDots"/>
+        <Param val="noise_dots_speed" valType="num" updates="constant" name="speed"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </DotsComponent>
+      <PolygonComponent name="dot_2" plugin="None">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="-0.2000, -0.2000, -0.2000" valType="color" updates="constant" name="fillColor"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="$dot_color" valType="color" updates="constant" name="lineColor"/>
+        <Param val="1" valType="num" updates="constant" name="lineWidth"/>
+        <Param val="4" valType="int" updates="constant" name="nVertices"/>
+        <Param val="dot_2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="circle" valType="str" updates="None" name="shape"/>
+        <Param val="dot_size" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="list" updates="constant" name="vertices"/>
+      </PolygonComponent>
+      <CodeComponent name="code_3" plugin="None">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="import numpy as np&amp;#10;&amp;#10;def move_dot_smooth(dot, dot_speed, field_size, current_angle, frames_in_direction, frame_count):&amp;#10;    &quot;&quot;&quot;&amp;#10;    Mueve el punto 'dot' de forma suave dentro de los límites de la pantalla.&amp;#10;&amp;#10;    dot: objeto visual de PsychoPy que se va a mover.&amp;#10;    dot_speed: velocidad del punto.&amp;#10;    field_size: tamaño del campo [ancho, alto] en unidades de PsychoPy.&amp;#10;    current_angle: ángulo actual de la dirección del punto.&amp;#10;    frames_in_direction: número de frames en los que el punto mantiene la misma dirección.&amp;#10;    frame_count: contador de frames que indica cuántos frames han pasado en la dirección actual.&amp;#10;&amp;#10;    Returns:&amp;#10;    - new_angle: El ángulo actualizado para la próxima llamada.&amp;#10;    - frame_count: El contador de frames actualizado.&amp;#10;    &quot;&quot;&quot;&amp;#10;    # Si hemos alcanzado el límite de frames para la dirección actual, cambiamos el ángulo&amp;#10;    if frame_count &gt;= frames_in_direction:&amp;#10;        # Elegir un nuevo ángulo aleatorio cercano al actual para mantener la suavidad&amp;#10;        current_angle += np.random.uniform(-np.pi/8, np.pi/8)&amp;#10;        frame_count = 0  # Reiniciar el contador de frames en la nueva dirección&amp;#10;    else:&amp;#10;        frame_count += 1&amp;#10;&amp;#10;    # Calcular el desplazamiento basado en el ángulo&amp;#10;    dx = dot_speed * np.cos(current_angle)&amp;#10;    dy = dot_speed * np.sin(current_angle)&amp;#10;&amp;#10;    # Calcular la nueva posición&amp;#10;    new_x = dot.pos[0] + dx&amp;#10;    new_y = dot.pos[1] + dy&amp;#10;&amp;#10;    # Verificar los límites de la pantalla y ajustar si es necesario&amp;#10;    if new_x &lt; -field_size[0]/2:&amp;#10;        new_x = -field_size[0]/2&amp;#10;        current_angle = np.pi - current_angle  # Invertir dirección horizontal&amp;#10;    elif new_x &gt; field_size[0]/2:&amp;#10;        new_x = field_size[0]/2&amp;#10;        current_angle = np.pi - current_angle&amp;#10;&amp;#10;    if new_y &lt; -field_size[1]/2:&amp;#10;        new_y = -field_size[1]/2&amp;#10;        current_angle = -current_angle  # Invertir dirección vertical&amp;#10;    elif new_y &gt; field_size[1]/2:&amp;#10;        new_y = field_size[1]/2&amp;#10;        current_angle = -current_angle&amp;#10;&amp;#10;    # Actualizar la posición del punto&amp;#10;    dot.pos = (new_x, new_y)&amp;#10;&amp;#10;    return current_angle, frame_count&amp;#10;&amp;#10;def move_dot_lateral(dot, dot_speed, field_size, direction, frame_count):&amp;#10;    &quot;&quot;&quot;&amp;#10;    Mueve el punto 'dot' de forma lineal lateral (derecha a izquierda) dentro de los límites del campo definido.&amp;#10;&amp;#10;    dot: objeto visual de PsychoPy que se va a mover.&amp;#10;    dot_speed: velocidad del punto.&amp;#10;    field_size: tamaño del campo [ancho, alto] en unidades de PsychoPy.&amp;#10;    direction: dirección actual del movimiento, 1 para derecha y -1 para izquierda.&amp;#10;    frame_count: contador de frames que indica cuántos frames han pasado.&amp;#10;&amp;#10;    Returns:&amp;#10;    - direction: La dirección actualizada para la próxima llamada.&amp;#10;    - frame_count: El contador de frames actualizado.&amp;#10;    &quot;&quot;&quot;&amp;#10;    # Calcular el desplazamiento basado en la dirección&amp;#10;    dx = dot_speed * direction&amp;#10;    new_x = dot.pos[0] + dx&amp;#10;    new_y = dot.pos[1]  # Mantener y constante&amp;#10;&amp;#10;    # Verificar los límites de la pantalla en el eje x y ajustar si es necesario&amp;#10;    if new_x &lt; -field_size[0] / 2:&amp;#10;        new_x = -field_size[0] / 2&amp;#10;        direction *= -1  # Cambiar de dirección&amp;#10;    elif new_x &gt; field_size[0] / 2:&amp;#10;        new_x = field_size[0] / 2&amp;#10;        direction *= -1  # Cambiar de dirección&amp;#10;&amp;#10;    # Actualizar la posición del punto&amp;#10;    dot.pos = (new_x, new_y)&amp;#10;&amp;#10;    return direction, frame_count + 1&amp;#10;" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="import * as np from 'numpy';&amp;#10;function move_dot_smooth(dot, dot_speed, field_size, current_angle, frames_in_direction, frame_count) {&amp;#10;    /*&amp;#10;    Mueve el punto 'dot' de forma suave dentro de los límites de la pantalla.&amp;#10;&amp;#10;    dot: objeto visual de PsychoPy que se va a mover.&amp;#10;    dot_speed: velocidad del punto.&amp;#10;    field_size: tamaño del campo [ancho, alto] en unidades de PsychoPy.&amp;#10;    current_angle: ángulo actual de la dirección del punto.&amp;#10;    frames_in_direction: número de frames en los que el punto mantiene la misma dirección.&amp;#10;    frame_count: contador de frames que indica cuántos frames han pasado en la dirección actual.&amp;#10;&amp;#10;    Returns:&amp;#10;    - new_angle: El ángulo actualizado para la próxima llamada.&amp;#10;    - frame_count: El contador de frames actualizado.&amp;#10;    */&amp;#10;    var dx, dy, new_x, new_y;&amp;#10;    if ((frame_count &gt;= frames_in_direction)) {&amp;#10;        current_angle += np.random.uniform(((- np.pi) / 8), (np.pi / 8));&amp;#10;        frame_count = 0;&amp;#10;    } else {&amp;#10;        frame_count += 1;&amp;#10;    }&amp;#10;    dx = (dot_speed * np.cos(current_angle));&amp;#10;    dy = (dot_speed * np.sin(current_angle));&amp;#10;    new_x = (dot.pos[0] + dx);&amp;#10;    new_y = (dot.pos[1] + dy);&amp;#10;    if ((new_x &lt; ((- field_size[0]) / 2))) {&amp;#10;        new_x = ((- field_size[0]) / 2);&amp;#10;        current_angle = (np.pi - current_angle);&amp;#10;    } else {&amp;#10;        if ((new_x &gt; (field_size[0] / 2))) {&amp;#10;            new_x = (field_size[0] / 2);&amp;#10;            current_angle = (np.pi - current_angle);&amp;#10;        }&amp;#10;    }&amp;#10;    if ((new_y &lt; ((- field_size[1]) / 2))) {&amp;#10;        new_y = ((- field_size[1]) / 2);&amp;#10;        current_angle = (- current_angle);&amp;#10;    } else {&amp;#10;        if ((new_y &gt; (field_size[1] / 2))) {&amp;#10;            new_y = (field_size[1] / 2);&amp;#10;            current_angle = (- current_angle);&amp;#10;        }&amp;#10;    }&amp;#10;    dot.pos = [new_x, new_y];&amp;#10;    return [current_angle, frame_count];&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="current_angle = np.random.uniform(0, (2 * np.pi));&amp;#10;frame_count = 0;&amp;#10;frames_in_direction = 20;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="current_angle = np.random.uniform(0, 2 * np.pi)  # Ángulo inicial aleatorio&amp;#10;frame_count = 0&amp;#10;frames_in_direction = 20  # Ajusta según la duración que desees para cada dirección&amp;#10;direction = 1 # start value of direction to te right&amp;#10;mode = 3 # behaviour of the stimuli and noise dots 1... 2... 3: Move noise with stimuli. 4:..." valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Py" valType="str" updates="None" name="Code Type"/>
+        <Param val="# Dentro del bucle de cada frame&amp;#10;&amp;#10;#if  mode == 1: # movimiento random del estimulo. Cuando cambia la coherencia del ruido el estimulo se mantiene igual&amp;#10;#    current_angle, frame_count = move_dot_smooth(dot_2, dot_speed, field_size, current_angle, frames_in_direction, frame_count)&amp;#10;    &amp;#10;#elif mode == 2: # movimiento lateral del estimulo. Cuando cambia la coherencia del ruido el estimulo se mantiene igual&amp;#10;#    direction, frame_count = move_dot_lateral(dot_2, dot_speed, field_size, direction, frame_count)&amp;#10;    &amp;#10;if mode == 3:&amp;#10;    current_angle, frame_count = move_dot_smooth(dot_2, dot_speed, field_size, current_angle, frames_in_direction, frame_count)&amp;#10;    &amp;#10;    if noise_coherent_motion: # Move noise with stimuli&amp;#10;        if frame_count % frames_in_direction*5 == 0: # each 100 frames change angle&amp;#10;            desvio = random.uniform(-20, 20)&amp;#10;        noise_dots_direction = math.degrees(current_angle) + desvio&amp;#10;&amp;#10;elif mode == 4:&amp;#10;    if noise_coherent_motion: # True&amp;#10;        direction, frame_count = move_dot_lateral(dot_2, dot_speed, field_size, direction, frame_count)&amp;#10;    else:&amp;#10;        current_angle, frame_count = move_dot_smooth(dot_2, dot_speed, field_size, current_angle, frames_in_direction, frame_count)&amp;#10;&amp;#10;# FLANCOS ASCENDENTE Y DESCENDENTE - Cambiar la coherencia del ruido segun el tiempo&amp;#10;if t&gt;3 and t&lt;10:&amp;#10;    if not noise_coherent_motion:&amp;#10;        dots_2.setFieldCoherence(1)&amp;#10;        noise_coherent_motion = 1&amp;#10;        #noise_dots_direction = 90&amp;#10;elif t&gt;13 and t&lt;20:&amp;#10;    if not noise_coherent_motion:&amp;#10;        dots_2.setFieldCoherence(1)&amp;#10;        noise_coherent_motion = 1&amp;#10;        noise_dots_direction = 0&amp;#10;        current_angle = 0&amp;#10;        direction = 1&amp;#10;        mode = 4&amp;#10;else:&amp;#10;    if noise_coherent_motion:&amp;#10;        dots_2.setFieldCoherence(0)&amp;#10;        noise_coherent_motion = 0&amp;#10;        #noise_dots_direction = 0&amp;#10;    elif t&gt;25:&amp;#10;        continueRoutine = False" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="[current_angle, frame_count] = move_dot_smooth(dot_2, dot_speed, field_size, current_angle, frames_in_direction, frame_count);&amp;#10;if (((t &gt; 3) &amp;&amp; (t &lt; 10))) {&amp;#10;    if ((! noise_dots_coherence)) {&amp;#10;        dots_2.setFieldCoherence(1);&amp;#10;        noise_dots_coherence = 1;&amp;#10;    }&amp;#10;} else {&amp;#10;    if (noise_dots_coherence) {&amp;#10;        dots_2.setFieldCoherence(0);&amp;#10;        noise_dots_coherence = 0;&amp;#10;    }&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_3" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
   </Routines>
   <Flow>
     <Routine name="STATIC_VARIABLES"/>
@@ -897,5 +1247,34 @@
     <Routine name="SEGUIMIENTO"/>
     <Routine name="DESCANSO"/>
     <Routine name="LECTURA"/>
+    <Routine name="DESCANSO"/>
+    <LoopInitiator loopType="TrialHandler" name="visual_search_imgs">
+      <Param name="Selected rows" updates="None" val="1:10" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\bathroom_23_c_l_toiletpaper.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\bedroom_10_c_l_hanger.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\bedroom_20_i_sr_bleach.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\bedroom_27_i_r_pingpongpaddle.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\bedroom_4_c_r_lamp.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\bedroom_8_i_l_sieve.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\kitchen_8_i_sl_mouse.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\office_1_i_l_rollingpin.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\office_23_i_sl_toycar.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\office_30_c_sl_book.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\waitingroom_12_i_sl_belt.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\waitingroom_1_i_l_kettle.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\waitingroom_22_c_sr_scarf.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\waitingroom_23_i_sr_sweetpotato.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\waitingroom_24_i_sr_washingupliquid.jpg'}, {'path': 'c:\\Users\\akoun\\Desktop\\Biocruces\\siburmuin\\src\\eye_tracking_test\\images\\visual_search\\waitingroom_6_i_r_controller.jpg'}, {'path': None}, {'path': None}, {'path': None}, {'path': None}, {'path': None}, {'path': None}, {'path': None}, {'path': None}, {'path': None}, {'path': None}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="loop_images.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="visual_search_imgs" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="VISUAL_SEARCH"/>
+    <LoopTerminator name="visual_search_imgs"/>
+    <Routine name="DVS"/>
+    <Routine name="DVS_COHERENCE"/>
+    <LoopInitiator loopType="TrialHandler" name="waldo_imgs">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[{'path': '.\\images\\find_waldo\\1.jpg'}, {'path': '.\\images\\find_waldo\\2.jpg'}]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="waldo_images.xlsx" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="sequential" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="waldo_imgs" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="WHERE_S_WALDO"/>
+    <LoopTerminator name="waldo_imgs"/>
   </Flow>
 </PsychoPy2experiment>
